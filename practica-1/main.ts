@@ -57,24 +57,19 @@ let enterpise: nave ={
     ]
 }
 
-
 //4.------------------------------------------------------------------------------------
 
-const num_nombres = (nave: nave) => {
+const con_nombre = enterpise.pasajeros.filter((elem: superviviente ) => {
+    if (Object.keys(elem).includes("nombre")){
+        return elem
+    }
+})
 
-    const con_nombre = nave.pasajeros.filter((elem: superviviente ) => {
-        if (Object.keys(elem).includes("nombre")){
-            return elem
-        }
-    })
+//Se podría meter todo en la función (los console.log), pero considero más interesante aislar los datos y llamarlos por separado
 
-    console.log("Se sabe el nombre de ",con_nombre.length)
+//console.log("Se sabe el nombre de ",con_nombre.length)
 
-    console.log(Object.values(con_nombre))
-}
-
-num_nombres(enterpise);
-console.log(" ");
+//console.log(Object.values(con_nombre))
 
 //======================================================================================
 //The side of paradise
@@ -109,10 +104,11 @@ const pasajeros_afectados: infeccion[] = [
     }
 ]
 
-pasajeros_afectados.forEach((elem: infeccion )=>{
-    if(elem.infectado === false && elem.nombre) console.log("Pasajero sano:",elem.nombre)
+const listar_sanos = pasajeros_afectados.forEach((elem: infeccion )=>{
+    if(elem.infectado === false && elem.nombre !== undefined) console.log("Pasajero sano:",elem.nombre)
 })
 
+//listar_sanos; //Si hiciese console.log aquí daría undefined ya que forEach no devuelve nada
 
 //2.------------------------------------------------------------------------------------
 
@@ -175,13 +171,44 @@ const fechas_completas = anos.map((elem: number) =>{
         minuto: Math.floor(Math.random()*59),   //https://www.freecodecamp.org/espanol/news/metodo-javascript-math-random-explicado/#:~:text=Para%20obtener%20un%20n%C3%BAmero%20aleatorio,random()%20por%20un%20n%C3%BAmero
         segundo: Math.floor(Math.random()*59)
     }
-    return devolucion
+    return devolucion;
 })
 
-console.log("Fechas completas",fechas_completas);
+//console.log("Fechas completas",fechas_completas);
 
 //======================================================================================
 //The trouble with Tribbles
 //======================================================================================
 
+//Daños y nº de tribles
 
+const turboConductos: number[][] = [
+    [15,10],
+    [25,30],
+    [5,2],
+    [40,31]
+]
+
+//1.
+
+const total_tribbles_mas20 = turboConductos.reduce((acc,elem) => {
+    if(elem[0] > 20) return acc + elem[1]; //Si cumple la condición sumo el valor de los tribbles al acumulador
+    else return acc; //Si no lo cumple, lo retorno sin modificarlo
+},0)
+
+console.log(total_tribbles_mas20);
+
+//2.
+
+const senal_lisa = turboConductos.flat();
+
+//console.log(senal_lisa);
+
+
+//3.
+
+const senal_peligro = turboConductos.flatMap((elem: number[])=>{ 
+    if(elem[1] >= (elem[0]*0,5)) return elem
+}).filter(elem => typeof elem !== "undefined")
+
+//console.log(senal_peligro)
