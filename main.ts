@@ -2,7 +2,7 @@
 // Space Seed
 //======================================================================================
 
-console.log("Space Seed \n")
+console.log("\n Space Seed \n")
 
 //1.------------------------------------------------------------------------------------
 
@@ -289,3 +289,24 @@ const senal_peligro_2 = lista_turbo_conductos.flatMap(elem =>{
 //He hecho que se devuelvan los datos junto al string, no comprendo si buscas solo "peligro" y "no peligro" o todo
 
 console.log("(2) Senal de peligro:",senal_peligro_2,"\n");
+
+//======================================================================================
+//Deno tests
+//======================================================================================
+
+//Se debería importar las funciones y poner los test en otro fichero, pero la entrega indica un único archivo .ts
+
+import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
+
+
+Deno.test("Prueba todos_sanos_curados", () => {
+    assertEquals(todos_sanos_curados, true);
+});
+
+Deno.test("Prueba anos", () => {
+    assertEquals(anos, [1999, 4020, 7888]);
+});
+
+Deno.test("Prueba total_tribbles_mas20", () => {
+    assertEquals(total_tribbles_mas20, 61);
+});
